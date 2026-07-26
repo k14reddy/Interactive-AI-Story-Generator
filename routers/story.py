@@ -54,6 +54,7 @@ def create_story(request: CreateStoryRequest,
     return job
 
 def generate_story_task(job_id: str, theme: str, session_id: str):
+    
     print("Background task started")
 
     db = SessionLocal()
