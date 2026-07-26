@@ -7,6 +7,9 @@ from db.database import create_tables
 
 create_tables()
 
+print("ALLOWED_ORIGINS =", settings.ALLOWED_ORIGINS)
+print(type(settings.ALLOWED_ORIGINS))
+
 app = FastAPI()
 
 app.add_middleware(
