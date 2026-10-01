@@ -15,20 +15,18 @@ function StoryGenerator() {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        let pollInterval;
+    if (!jobId) return;
 
-        if (jobId && jobStatus === "processing") {
-            pollInterval = setInterval(() => {
-                pollJobStatus(jobId)
-            }, 5000)
-        }
+    if (jobStatus !== "pending" && jobStatus !== "processing") {
+        return;
+    }
 
-        return () => {
-            if (pollInterval) {
-                clearInterval(pollInterval)
-            }
-        }
-    }, [jobId, jobStatus])
+    const timeout = setTimeout(() => {
+        pollJobStatus(jobId);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+}, [jobId, jobStatus]);
 
     const generateStory = async (theme) => {
         setLoading(true)
